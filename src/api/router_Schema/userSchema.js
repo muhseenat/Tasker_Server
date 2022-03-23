@@ -1,4 +1,4 @@
-const {login} = require('../controllers/user')
+const {login} = require('../controllers/auth')
 
 const loginOptns={
     schema:{
