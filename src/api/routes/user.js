@@ -1,16 +1,15 @@
-function userRoutes(fastify,options,done){
-    
-    fastify.post('/login',(req,reply)=>{
-        console.log(req.body);
-        const{email,password}=req.body;
-        reply.send("successfully logged")
-    })
+const {loginOptns}=require('../router_Schema/userSchema')
 
-    fastify.post('/signup',(req,reply)=>{
-        console.log(req.body);
-        const {name,email,phone,password}= req.body;
-        reply.send("Succesfully signup")
-    })
+
+function userRoutes(fastify,options,done){
+    //login route
+    fastify.post('/login',loginOptns);
+
+    // fastify.post('/signup',(req,reply)=>{
+    //     console.log(req.body);
+    //     const {name,email,phone,password}= req.body;
+    //     reply.send("Succesfully signup")
+    // })
     
     
     done()

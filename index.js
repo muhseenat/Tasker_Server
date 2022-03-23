@@ -1,5 +1,13 @@
 const fastify= require ('fastify')({logger:true})
+//Swagger
+fastify.register(require("fastify-swagger"),{
+    exposeRoute:true,
+    routePrefix:'/docs',
+    swagger:{
+        info:{titile:'tasker-api'},
 
+    },
+})
 //Routes
 fastify.register(require("./src/api/routes/user"));
 
