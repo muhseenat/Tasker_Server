@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "dev":"nodemon server"
+    "dev": "nodemon server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "fastify": "^3.27.4",
+    "fastify-express": "^0.3.3",
     "fastify-swagger": "^5.0.0"
   }
 }

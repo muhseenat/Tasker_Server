@@ -1,4 +1,5 @@
 const fastify= require ('fastify')({logger:true})
+const db = require("./src/config/dbConnection")
 //Swagger
 fastify.register(require("fastify-swagger"),{
     exposeRoute:true,
@@ -8,8 +9,15 @@ fastify.register(require("fastify-swagger"),{
 
     },
 })
+
+// db connection
+db.dbConnect('mongodb://localhost:27017/taskserver')
+
+
 //Routes
-fastify.register(require("./src/api/routes/user"));
+await fastify.register(require('fastify-express'))
+fastify.use(require('cors')())
+fastify.use(require("./src/routes/user"));
 
 
 const PORT= 8080;
