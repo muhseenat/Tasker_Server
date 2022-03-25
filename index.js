@@ -38,7 +38,7 @@ fastify.use(require('cors')({
 fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 
 
-const PORT= 8080;
+const PORT= 5050;
 
 
 
