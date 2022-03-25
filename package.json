@@ -11,8 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "fastify": "^3.27.4",
     "fastify-express": "^0.3.3",
-    "fastify-swagger": "^5.0.0"
+    "fastify-swagger": "^5.0.0",
+    "mongoose": "^6.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

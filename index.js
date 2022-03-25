@@ -14,9 +14,13 @@ fastify.register(require("fastify-swagger"),{
 db.dbConnect('mongodb://localhost:27017/taskserver')
 
 
+fastify.register(require('fastify-express'))
+fastify.use(require('cors')({
+    origin:"http://localhost:3000"
+
+}))
+
 //Routes
-await fastify.register(require('fastify-express'))
-fastify.use(require('cors')())
 fastify.use(require("./src/routes/user"));
 
 
