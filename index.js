@@ -1,7 +1,20 @@
-const fastify= require ('fastify')({logger:true})
+const environment= 'development'
+const fastify = require("fastify")({
+    logger: {
+        prettyPrint:
+          environment === 'development'
+            ? {
+                translateTime: 'HH:MM:ss Z',
+                ignore: 'pid,hostname'
+              }
+            : false
+      }
+  })
+
 const db = require("./src/config/dbConnection")
 //Swagger
 fastify.register(require("fastify-swagger"),{
+    
     exposeRoute:true,
     routePrefix:'/docs',
     swagger:{
@@ -10,24 +23,33 @@ fastify.register(require("fastify-swagger"),{
     },
 })
 
+const start = async()=>{
 // db connection
 db.dbConnect('mongodb://localhost:27017/taskserver')
 
+await fastify.register(require('fastify-express'))
 
-fastify.register(require('fastify-express'))
 fastify.use(require('cors')({
     origin:"http://localhost:3000"
-
 }))
 
+
 //Routes
-fastify.use(require("./src/routes/user"));
+fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 
 
 const PORT= 8080;
 
 
-const start = async()=>{
+
+
+
+
+
+
+
+
+
    try {
        fastify.listen(PORT)
    } catch (error) {
@@ -35,4 +57,6 @@ const start = async()=>{
        process.exit(1)
    }
 }
+
+// calling the server
 start()

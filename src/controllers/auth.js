@@ -1,7 +1,19 @@
-const login =(req,reply)=>{
-    console.log(req.body);
-    const{email,password}=req.body;
-    reply.send("successfully logged")
+const {userLogin,userSignup} = require("../helpers/user")
+
+const userLoginFunction =(req,res)=>{
+    userLogin(req.body).then((data)=>{
+        res.send(data)
+    }).catch(err=>{
+        res.code(403).send({err})
+    })
 }
 
-module.exports={login}
+const userSignupFunction = (req,res)=>{
+    userSignup(req.body).then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.code(403).send({err})
+    })
+}
+
+module.exports={userLoginFunction,userSignupFunction}

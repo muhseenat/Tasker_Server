@@ -16,7 +16,8 @@
     "fastify": "^3.27.4",
     "fastify-express": "^0.3.3",
     "fastify-swagger": "^5.0.0",
-    "mongoose": "^6.2.8"
+    "mongoose": "^6.2.8",
+    "pino-pretty": "^7.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
