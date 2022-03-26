@@ -10,7 +10,7 @@ const fastify = require("fastify")({
             : false
       }
   })
-  //.env file setup
+  //.env file setup schema
 const fastifyEnv = require('fastify-env')
 const schema = {
   type: 'object',
@@ -29,12 +29,12 @@ const options = {
   data: process.env
 }
 
-const initialize = async () => {
-    fastify.register(fastifyEnv, options)
-    await fastify.after()
-}
+// const initialize = async () => {
+//     fastify.register(fastifyEnv, options)
+//     await fastify.after()
+// }
 
-initialize()
+// initialize()
 
 const db = require("./src/config/dbConnection")
 //Swagger
@@ -57,6 +57,15 @@ await fastify.register(require('fastify-express'))
 fastify.use(require('cors')({
     origin:"http://localhost:3000"
 }))
+//.env file setup
+fastify
+  .register(fastifyEnv, options)
+  .ready((err) => {
+    if (err) console.error(err)
+
+    console.log(fastify.config) // or fastify[options.confKey]
+    // output: { PORT: 3000 }
+  })
 
 
 //Routes

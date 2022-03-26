@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
         type:String,
         require:true
     },
+    status:{
+        type:Boolean,
+        default:true
+    },
     approved_jobs:{
         type:Array
     },
