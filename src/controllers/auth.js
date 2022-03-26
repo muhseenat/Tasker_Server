@@ -32,11 +32,13 @@ const adminLoginFunction =(req,res)=>{
     const {email,password} = req.body;
     try {
         if(email=="admin@new" && password=="123456"){
+            console.log('admin indddddd');
             const admin=true;
                 const token= jwt.sign({admin:true},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
                 res.send(token)
         }        
     } catch (error) {
+        console.log('admin illlaaa');
          res.code(403).send(error)
     }
  
