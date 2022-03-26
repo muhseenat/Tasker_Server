@@ -70,7 +70,7 @@ fastify
 
 //Routes
 fastify.register(require("./src/routes/user"),{ prefix: '/api' });
-
+fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
 
 const PORT= 5050;
 

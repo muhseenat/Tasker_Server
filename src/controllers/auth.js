@@ -28,5 +28,17 @@ const userSignupFunction = (req,res)=>{
         res.code(403).send({err})
     })
 }
-
-module.exports={userLoginFunction,userSignupFunction}
+const adminLoginFunction =(req,res)=>{
+    const {email,password} = req.body;
+    try {
+        if(email=="admin@new" && password=="123456"){
+            const admin=true;
+                const token= jwt.sign({admin:true},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
+                res.send(token)
+        }        
+    } catch (error) {
+         res.code(403).send(error)
+    }
+ 
+}
+module.exports={userLoginFunction,userSignupFunction,adminLoginFunction}

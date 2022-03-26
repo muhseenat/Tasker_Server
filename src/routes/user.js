@@ -1,7 +1,7 @@
-const {loginOptns,signupOption} = require('../router_Schema/userSchema')
+const {loginOption,signupOption} = require('../router_Schema/userSchema')
 
-function productRoutes(fastify, opt, done) {
-    fastify.post('/login',loginOptns)
+function userRoutes(fastify, opt, done) {
+    fastify.post('/login',loginOption)
     fastify.post('/signup',signupOption)
 
 
@@ -11,4 +11,4 @@ function productRoutes(fastify, opt, done) {
   done();
 }
 
-module.exports = productRoutes;
+module.exports = userRoutes;

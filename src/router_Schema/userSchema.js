@@ -6,12 +6,13 @@ const userItem = {
         name:{type :'string'},
         email:{type:"string"},
         phone:{type:"number"},
+        token:{type:'string'}
     }
 }
 
 
 
-const loginOptns={
+const loginOption={
     schema:{
         response:{
             200:userItem
@@ -47,4 +48,4 @@ const signupOption ={
     handler:userSignupFunction
 }
 
-module.exports={loginOptns,signupOption}
+module.exports={loginOption,signupOption}
