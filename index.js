@@ -10,6 +10,31 @@ const fastify = require("fastify")({
             : false
       }
   })
+  //.env file setup
+const fastifyEnv = require('fastify-env')
+const schema = {
+  type: 'object',
+  required: ['JWT_SECRET_KEY'],
+  properties: {
+    JWT_SECRET_KEY: {
+      type: 'string'
+    },
+  }
+}
+
+const options = {
+  confKey: 'config',
+  schema,
+  dotenv: true,
+  data: process.env
+}
+
+const initialize = async () => {
+    fastify.register(fastifyEnv, options)
+    await fastify.after()
+}
+
+initialize()
 
 const db = require("./src/config/dbConnection")
 //Swagger
@@ -39,15 +64,6 @@ fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 
 
 const PORT= 5050;
-
-
-
-
-
-
-
-
-
 
 
    try {
