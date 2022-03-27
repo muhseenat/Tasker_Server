@@ -55,7 +55,7 @@ db.dbConnect('mongodb://localhost:27017/taskserver')
 await fastify.register(require('fastify-express'))
 
 fastify.use(require('cors')({
-    origin:"http://localhost:3000"
+    origin:["http://localhost:3000","http://localhost:3001"]
 }))
 //.env file setup
 fastify

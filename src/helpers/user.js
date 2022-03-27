@@ -11,6 +11,7 @@ module.exports={
                     data.comparePassword(password,(err,success)=>{
                         if(success){
                             resolve(data)
+                            
                         }else{
                             reject('Email or Password Invalid')
                         }
