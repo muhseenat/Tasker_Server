@@ -36,10 +36,12 @@ const adminLoginFunction =(req,res)=>{
             const admin=true;
                 const token= jwt.sign({admin:true},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
                 res.send(token)
-        }        
+        } else{
+         res.code(403).send({errorMessage:"Wrong email and password"})
+
+        }       
     } catch (error) {
-        console.log('admin illlaaa');
-         res.code(403).send(error)
+         res.code(500).send()
     }
  
 }
