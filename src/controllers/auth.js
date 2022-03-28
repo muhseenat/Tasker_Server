@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 
 const userLoginFunction =(req,res)=>{
+    console.log(req.body);
     userLogin(req.body).then((data)=>{
         console.log(data,"this is dataa");
         const token= jwt.sign({user:data._id},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
@@ -28,7 +29,6 @@ const adminLoginFunction =(req,res)=>{
     const {email,password} = req.body;
     try {
         if(email=="admin@new.com" && password=="123456"){
-            console.log('admin indddddd');
             const admin=true;
                 const token= jwt.sign({admin:true},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
                 res.send(token)

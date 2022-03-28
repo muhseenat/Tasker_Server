@@ -29,6 +29,8 @@ module.exports={
             // finding email exist or phone
 
            const userExit = await User.findOne({$or:[{email:data.email},{phone:data.phone}]}) 
+           console.log(userExit);
+
             if(userExit) reject('user already exist')
              
             const user = new User({
