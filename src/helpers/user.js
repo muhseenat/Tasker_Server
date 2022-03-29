@@ -6,7 +6,7 @@ module.exports={
             const {email, password}= data
             User.findOne({email}).then((data)=>{
                 if(!data){ 
-                    reject('not found')
+                    reject('User not found')
                 }else{
                     data.comparePassword(password,(err,success)=>{
                         if(success){
@@ -31,7 +31,7 @@ module.exports={
            const userExit = await User.findOne({$or:[{email:data.email},{phone:data.phone}]}) 
            console.log(userExit);
 
-            if(userExit) reject('user already exist')
+            if(userExit) reject('User already exist')
              
             const user = new User({
                 name:data.name,

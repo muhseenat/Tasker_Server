@@ -12,6 +12,7 @@ const userItem = {
 
 
 
+
 const loginOption={
     schema:{
         response:{
@@ -47,5 +48,7 @@ const signupOption ={
     },
     handler:userSignupFunction
 }
+
+
 
 module.exports={loginOption,signupOption}
