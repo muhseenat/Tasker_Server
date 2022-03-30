@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const userLoginFunction =(req,res)=>{
     console.log(req.body);
     userLogin(req.body).then((data)=>{
-        console.log(data,"this is dataa");
         const token= jwt.sign({user:data._id},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
         const response={...data._doc,token}
         res.send(response)

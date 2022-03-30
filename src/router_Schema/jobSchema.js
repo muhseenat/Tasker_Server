@@ -5,6 +5,7 @@ const jobItem = {
     type:'object',
     properties:{
         job_designation:{type :'string'},
+        job_desc:{type:'string'},
         category:{type :'string'},
         province:{type :'string'},
         city:{type :'string'},
