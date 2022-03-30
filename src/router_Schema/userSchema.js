@@ -3,6 +3,7 @@ const {userLoginFunction,userSignupFunction} = require('../controllers/auth')
 const userItem = {
     type:'object',
     properties:{
+        _id:{type:'string'},
         name:{type :'string'},
         email:{type:"string"},
         phone:{type:"number"},

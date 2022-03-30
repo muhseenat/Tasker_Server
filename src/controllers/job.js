@@ -1,8 +1,6 @@
-const {createJob} = require("../helpers/job")
+const {createJob,getJobs} = require("../helpers/job")
 
 const createJobFunction=(req,res)=>{
-    console.log("--------jobbbbbb=========");
-    console.log(req.body);
     createJob(req.body).then((data)=>{
         res.send(data)
     }).catch(err=>{
@@ -12,4 +10,15 @@ const createJobFunction=(req,res)=>{
 
 }
 
-module.exports={createJobFunction}
+ const getJobsFunction=(req,res)=>{
+
+     getJobs().then((data)=>{
+         console.log('startinggggg');
+         console.log(data,'jobsssssssss');
+         res.send(data)
+     }).catch(err=>{
+         res.code(400).send({err})
+     })
+ }
+
+module.exports={createJobFunction,getJobsFunction}

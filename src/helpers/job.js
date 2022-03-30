@@ -1,4 +1,4 @@
-const Job = require('../models/jobSchema');
+const Job = require('../model/jobSchema');
 
 
 module.exports ={
@@ -21,6 +21,14 @@ module.exports ={
          }).catch((err)=>{
              reject(err)
          })
+     })
+ },
+
+ getJobs:()=>{
+     return new Promise((resolve,reject)=>{
+       Job.find({}).then((data)=>{
+           resolve(data)
+       }).catch(err=>reject(err))
      })
  }
 
