@@ -1,4 +1,6 @@
+const { applyJobFunction } = require('../controllers/job');
 const Job = require('../model/jobSchema');
+const apply= requir('../model/appliedJobSchema')
 
 
 module.exports ={
@@ -30,6 +32,24 @@ module.exports ={
            resolve(data)
        }).catch(err=>reject(err))
      })
+ },
+
+ applyJob:(data)=>{
+     return new Promise((resolve,reject)=>{
+         const appliedJob=new apply({
+            user_id:data.user_id,
+            tasker_id:data.tasker_id,
+            job_id:data.job_id,
+            resume:data.resume
+         
+         })
+         appliedJob.save().then((appliedJob)=>{
+             resolve(appliedJob)
+         }).catch((err)=>{
+             reject(err)
+         })
+     })
+
  }
 
 }

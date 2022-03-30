@@ -1,5 +1,5 @@
 
-const {createJobFunction,getJobsFunction} = require('../controllers/job')
+const {createJobFunction,getJobsFunction,applyJobFunction} = require('../controllers/job')
 
 const jobItem = {
     type:'array',
@@ -17,7 +17,17 @@ const jobItem = {
         skills:{type :'string'}
     } 
 }
-
+const appliedJobItem={
+    type:'array',
+    properties:{
+        user_id:{type:'string'},
+        job_id:{type:'string'},
+        tasker_id:{type:'string'},
+        resume:{type:'object'},
+     
+        
+    }
+}
 
 
 const createJobOption={
@@ -45,4 +55,21 @@ const getJobOptions={
     handler:getJobsFunction
 }
 
-module.exports={createJobOption,getJobOptions}
+
+const applyJobOptions={
+    schema:{
+        response:{
+            200:'Success'
+        },
+        body:{
+            type:'object',
+            required:["user_id","job_id","tasker_id","resume"],
+            properties:{
+              ...appliedJobItem.properties
+            }
+        }
+    },
+    handler:applyJobFunction
+}
+
+module.exports={createJobOption,getJobOptions,applyJobOptions}
