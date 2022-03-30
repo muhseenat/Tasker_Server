@@ -29,12 +29,7 @@ const options = {
   data: process.env
 }
 
-// const initialize = async () => {
-//     fastify.register(fastifyEnv, options)
-//     await fastify.after()
-// }
 
-// initialize()
 
 const db = require("./src/config/dbConnection")
 //Swagger
@@ -50,7 +45,8 @@ fastify.register(require("fastify-swagger"),{
 
 const start = async()=>{
 // db connection
-db.dbConnect('mongodb://localhost:27017/taskserver')
+// db.dbConnect('mongodb://localhost:27017/taskserver')
+db.dbConnect(process.env.MONGODB_URL)
 
 await fastify.register(require('fastify-express'))
 

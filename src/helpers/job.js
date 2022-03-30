@@ -1,6 +1,6 @@
 const { applyJobFunction } = require('../controllers/job');
 const Job = require('../model/jobSchema');
-const apply= requir('../model/appliedJobSchema')
+const apply= require('../model/appliedJobSchema')
 
 
 module.exports ={
