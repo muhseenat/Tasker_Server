@@ -46,7 +46,6 @@ fastify.register(require("fastify-swagger"),{
 const start = async()=>{
 // db connection
 // db.dbConnect('mongodb://localhost:27017/taskserver')
-db.dbConnect(process.env.MONGODB_URL)
 
 await fastify.register(require('fastify-express'))
 
@@ -62,6 +61,8 @@ fastify
     console.log(fastify.config) // or fastify[options.confKey]
     // output: { PORT: 3000 }
   })
+  console.log(fastify.config.JWT_SECRET_KEY);
+  db.dbConnect(process.env.MONGODB_URL)
 
 
 //Routes

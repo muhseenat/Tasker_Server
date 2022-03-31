@@ -16,7 +16,7 @@ const userLoginFunction =(req,res)=>{
 
 const userSignupFunction = (req,res)=>{
     userSignup(req.body).then((data)=>{
-        console.log(process.env.JWT_SECRET_KEY);
+        console.log(process.env.JWT_SECRET_KEY,'jwtttttt');
         const token = jwt.sign({user:data._id},process.env.JWT_SECRET_KEY,{expiresIn:"2d"})
         const response={...data._doc,token}
         res.send(response)

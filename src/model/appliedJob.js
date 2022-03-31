@@ -5,16 +5,12 @@ const appliedJobSchema=mongoose.Schema({
         type:'String',
         required:true,
     },
-    tasker_id:{
-        type:'String',
-        
-    },
     job_id:{
         type:'String',
         required:true,
     },
     resume:{
-        type:''
+        type:'Object'
     }
 
 },{timestamps:true})
