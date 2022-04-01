@@ -20,6 +20,7 @@ const createJobFunction=(req,res)=>{
          res.code(400).send({err})
      })
  }
+ 
  const applyJobFunction=(req,res)=>{
      applyJob(req.body).then((data)=>{
          res.send(data);

@@ -1,4 +1,10 @@
+const db = require("./src/config/dbConnection")
 const environment= 'development'
+// const storage = require('./src/config/multer2')
+
+// const parser = multer({ storage });
+
+require('dotenv').config()
 const fastify = require("fastify")({
     logger: {
         prettyPrint:
@@ -10,29 +16,9 @@ const fastify = require("fastify")({
             : false
       }
   })
-  //.env file setup schema
-const fastifyEnv = require('fastify-env')
-const schema = {
-  type: 'object',
-  required: ['JWT_SECRET_KEY'],
-  properties: {
-    JWT_SECRET_KEY: {
-      type: 'string'
-    },
-  }
-}
-
-const options = {
-  confKey: 'config',
-  schema,
-  dotenv: true,
-  data: process.env
-}
 
 
-
-const db = require("./src/config/dbConnection")
-//Swagger
+//SWAGGER FOR API DOCUMENTATION
 fastify.register(require("fastify-swagger"),{
     
     exposeRoute:true,
@@ -43,31 +29,27 @@ fastify.register(require("fastify-swagger"),{
     },
 })
 
+//SERVER CONFIGURATION
 const start = async()=>{
-// db connection
-// db.dbConnect('mongodb://localhost:27017/taskserver')
 
 await fastify.register(require('fastify-express'))
 
 fastify.use(require('cors')({
     origin:["http://localhost:3000","http://localhost:3001"]
 }))
-//.env file setup
-fastify
-  .register(fastifyEnv, options)
-  .ready((err) => {
-    if (err) console.error(err)
 
-    console.log(fastify.config) // or fastify[options.confKey]
-    // output: { PORT: 3000 }
-  })
-  console.log(fastify.config.JWT_SECRET_KEY);
-  db.dbConnect(process.env.MONGODB_URL)
+//CONNECTION TO ATLAS
+ db.dbConnect(process.env.MONGODB_URL)
 
+// // Rsegister plugins below:
 
-//Routes
+// //Decorate fastify with our parser
+// fastify.decorate('multer', { parser });
+
+//ADMIN AND USER ROUTES
 fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
+
 
 const PORT= 5050;
 

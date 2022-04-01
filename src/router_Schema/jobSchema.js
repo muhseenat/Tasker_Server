@@ -58,9 +58,7 @@ const getJobOptions={
 
 const applyJobOptions={
     schema:{
-        response:{
-            200:'Success'
-        },
+       
         body:{
             type:'object',
             required:["user_id","job_id","tasker_id","resume"],

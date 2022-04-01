@@ -12,13 +12,18 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.29.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
     "fastify-env": "^2.1.1",
     "fastify-express": "^0.3.3",
+    "fastify-multer": "^2.0.2",
     "fastify-swagger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.8",
+    "multer": "^1.4.4",
+    "multer-storage-cloudinary": "^4.0.0",
     "pino-pretty": "^7.6.0"
   },
   "devDependencies": {
