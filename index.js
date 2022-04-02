@@ -36,7 +36,7 @@ await fastify.register(require('fastify-express'))
 fastify.register(require('fastify-multipart'))
 
 fastify.use(require('cors')({
-    origin:["http://localhost:3000","http://localhost:3001"]
+    origin:["http://localhost:3000","http://localhost:3001","*"]
 }))
 
 //CONNECTION TO ATLAS
