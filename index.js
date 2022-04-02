@@ -52,11 +52,11 @@ fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
 
 
-const PORT= 5050;
+const PORT= process.env.PORT||5050
 
 
    try {
-       fastify.listen(process.env.PORT||PORT)
+       fastify.listen(PORT)
    } catch (error) {
        fastify.log.error(error)
        process.exit(1)
