@@ -52,12 +52,12 @@ fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
 
 
-const PORT= process.env.PORT||5050
-
+const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+ 
 
    try {
-       fastify.listen(PORT,function () {
-    console.log("server started");
+       fastify.listen(PORT,LOCAL_ADDRESS).then((success)=>{
+           console.log(`server started @ ${PORT} and ${LOCAL_ADDRESS}`)
        })
    } catch (error) {
        fastify.log.error(error)
