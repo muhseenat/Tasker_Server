@@ -17,12 +17,7 @@
  
  //ADD CATEGORY OPTION SCHEMA
  const addCategoryOption={
-     schema:{
-         body:{
-             type:'object',
-            
-         }
-},
+  
      preHandler:upload.array('img'),
      handler:addCategoryFunction
  }

@@ -1,6 +1,6 @@
 const {adminLoginFunction} = require('../controllers/auth')
 
-
+// ADMIN ITEM 
 const adminItem ={
     type:'object',
     properties:{
@@ -8,6 +8,7 @@ const adminItem ={
     }
 }
 
+//ADMIN LOGIN OPTION SCHEMA
 const adminLoginOption={
     schema:{
         response:{

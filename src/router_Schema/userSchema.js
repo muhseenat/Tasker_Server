@@ -1,5 +1,5 @@
 const {userLoginFunction,userSignupFunction} = require('../controllers/auth')
-
+//USER ITEM
 const userItem = {
     type:'object',
     properties:{
@@ -13,7 +13,7 @@ const userItem = {
 
 
 
-
+// USER LOGIN OPTION
 const loginOption={
     schema:{
         response:{
@@ -32,7 +32,7 @@ const loginOption={
     handler:userLoginFunction
 }
 
-
+// USER SIGNUP OPTION
 const signupOption ={
     schema:{
         response:{

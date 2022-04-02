@@ -2,7 +2,7 @@ const {userLogin,userSignup} = require("../helpers/user")
 const jwt = require('jsonwebtoken');
 
 
-
+// USER LOGIN CONTROLLER
 const userLoginFunction =(req,res)=>{
     console.log(req.body);
     userLogin(req.body).then((data)=>{
@@ -13,7 +13,7 @@ const userLoginFunction =(req,res)=>{
         res.code(403).send({err})
     })
 }
-
+// USER SIGNUP CONTROLLER
 const userSignupFunction = (req,res)=>{
     userSignup(req.body).then((data)=>{
         console.log(process.env.JWT_SECRET_KEY,'jwtttttt');
@@ -24,6 +24,9 @@ const userSignupFunction = (req,res)=>{
         res.code(403).send({err})
     })
 }
+
+
+//ADMIN LOGIN CONTROLLER
 const adminLoginFunction =(req,res)=>{
     const {email,password} = req.body;
     try {

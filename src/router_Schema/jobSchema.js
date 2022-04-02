@@ -1,6 +1,6 @@
 
 const {createJobFunction,getJobsFunction,applyJobFunction} = require('../controllers/job')
-
+// JOB ITEM
 const jobItem = {
     type:'array',
     properties:{
@@ -17,6 +17,8 @@ const jobItem = {
         skills:{type :'string'}
     } 
 }
+
+// APPLIED JOB ITEM
 const appliedJobItem={
     type:'array',
     properties:{
@@ -29,7 +31,7 @@ const appliedJobItem={
     }
 }
 
-
+// CREATE JOB OPTION SCHEMA
 const createJobOption={
     schema:{
         response:{
@@ -46,6 +48,7 @@ const createJobOption={
     handler:createJobFunction
 }
 
+//GET JOB OPTION SCHEMA
 const getJobOptions={
     schema:{
         response:{
@@ -55,7 +58,7 @@ const getJobOptions={
     handler:getJobsFunction
 }
 
-
+//APPLY JOB OPTION SCHEMA
 const applyJobOptions={
     schema:{
        

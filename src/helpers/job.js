@@ -3,6 +3,8 @@ const apply= require('../model/appliedJob')
 
 
 module.exports ={
+
+ // JOB DETAILS TO DB HELPER 
  createJob:(data)=>{
      return new Promise((resolve,reject)=>{
          const job = new Job({
@@ -25,6 +27,7 @@ module.exports ={
      })
  },
 
+ // GET JOBS FROM DB
  getJobs:()=>{
      return new Promise((resolve,reject)=>{
        Job.find({}).then((data)=>{
@@ -33,6 +36,7 @@ module.exports ={
      })
  },
 
+ //APPLIED JOB DETAILS TO DB HELPER
  applyJob:(data)=>{
      return new Promise((resolve,reject)=>{
          const appliedJob=new apply({

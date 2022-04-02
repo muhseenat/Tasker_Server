@@ -1,6 +1,7 @@
 const User = require("../model/userSchema")
 
 module.exports={
+    // USER LOGIN HELPER
     userLogin : ( data)=>{
         return new Promise(async(resolve,reject)=>{
             const {email, password}= data
@@ -23,6 +24,7 @@ module.exports={
         })
     },
 
+    // USER SIGNUP HELPER
     userSignup:(data)=>{
         return new Promise(async(resolve,reject)=>{
 

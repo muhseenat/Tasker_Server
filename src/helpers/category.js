@@ -1,9 +1,8 @@
 const Category = require('../model/categorySchema')
 
 module.exports={
-
-    //GET CATAGORIES FROM DB
-
+    
+//  GET CATAGORIES FROM DB
   getCategory:()=>{
       return new Promise((resolve,reject)=>{
           Category.find({}).then((data)=>{
@@ -12,9 +11,17 @@ module.exports={
       })
   },
   
-  
-//   addCategory:(data)=>{
-//       return new Promise((resolve ,reject))
+  //  ADD CATAGORIES TO DB 
+  addCategory:(data)=>{
+      return new Promise((resolve ,reject)=>{
+          const category=new Category({
+              name:data.category,
+              image:data.url
+          })
+          category.save().then((category)=>{
+              resolve(category)
+          }).catch(err=>reject(err))
+      })
 
-//   }
+  }
 }

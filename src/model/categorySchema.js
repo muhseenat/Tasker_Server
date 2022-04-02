@@ -6,7 +6,7 @@ const CategorySchema=mongoose.Schema({
         type:String,
         required:true
     },
-    img:{
+    image:{
         type:Array,
         required:true
     }

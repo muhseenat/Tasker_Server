@@ -1,9 +1,8 @@
 
+const {getCategory} = require('../helpers/category')
 
-
-
+// CONTROLLER TO ADD CATEGORIES TO DB
 const addCategoryFunction= async(req,res)=>{
-
     const url=[]
     const files = req.files;
     for(const file of files){
@@ -22,12 +21,16 @@ const addCategoryFunction= async(req,res)=>{
 
     }
 
-//GET CATAGORIES FROM DB CONTROLLER
+// CONTROLLER FOR GET CATEGORIES FROM DB
 const getCategoryFunction=(req,res)=>{
-  getCategory()
+  getCategory().then((data)=>{
+    res.send(data)
+  }).catch((err)=>{
+    res.code(400).send({err})
+  })
 
 }
 
 
 
-module.exports={addCategoryFunction}
+module.exports={addCategoryFunction,getCategoryFunction}

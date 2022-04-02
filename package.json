@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
+    "start": "node index",
     "dev": "nodemon server"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "fastify-env": "^2.1.1",
     "fastify-express": "^0.3.3",
     "fastify-multer": "^2.0.2",
+    "fastify-multipart": "^5.3.1",
     "fastify-swagger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.8",
