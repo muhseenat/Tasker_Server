@@ -56,10 +56,12 @@ const PORT= process.env.PORT||5050
 
 
    try {
-       fastify.listen(PORT)
+       fastify.listen(PORT,function () {
+    console.log("server started");
+       })
    } catch (error) {
        fastify.log.error(error)
-       process.exit(1)
+       
    }
 }
 
