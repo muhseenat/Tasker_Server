@@ -56,7 +56,7 @@ const PORT= 5050;
 
 
    try {
-       fastify.listen(PORT)
+       fastify.listen(process.env.PORT||PORT)
    } catch (error) {
        fastify.log.error(error)
        process.exit(1)
