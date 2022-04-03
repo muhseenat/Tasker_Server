@@ -1,4 +1,4 @@
-const {createJob,getJobs,applyJob} = require("../helpers/job")
+const {createJob,getJobs,applyJob,getAppliedJob} = require("../helpers/job")
 
 // JOB CREATING CONTROLER
 const createJobFunction=(req,res)=>{
@@ -30,4 +30,11 @@ const createJobFunction=(req,res)=>{
      })
  }
 
-module.exports={createJobFunction,getJobsFunction,applyJobFunction}
+ //APPLIED JOBS GETTING CONTROLLER
+ const getAppliedJobFunction=(req,res)=>{
+     getAppliedJob().then((data)=>{
+         res.send(data)
+     }).catch(err=>res.code(400).send({err}))
+ }
+
+module.exports={createJobFunction,getJobsFunction,applyJobFunction,getAppliedJobFunction}
