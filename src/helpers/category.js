@@ -16,7 +16,7 @@ module.exports={
       return new Promise((resolve ,reject)=>{
           const category=new Category({
               name:data.category,
-              image:data.url
+              
           })
           category.save().then((category)=>{
               resolve(category)
