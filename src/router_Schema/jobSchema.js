@@ -64,10 +64,8 @@ const applyJobOptions={
        
         body:{
             type:'object',
-            required:["user_id","job_id","tasker_id","resume"],
-            properties:{
-              ...appliedJobItem.properties
-            }
+            required:["user_id","job_id"],
+          
         }
     },
     handler:applyJobFunction

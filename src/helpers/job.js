@@ -7,6 +7,7 @@ module.exports ={
  // JOB DETAILS TO DB HELPER 
  createJob:(data)=>{
      return new Promise((resolve,reject)=>{
+         console.log(data);
          const job = new Job({
             user_id:data.user_id,
             job_designation:data.job_designation,
@@ -39,12 +40,21 @@ module.exports ={
  //APPLIED JOB DETAILS TO DB HELPER
  applyJob:(data)=>{
      return new Promise((resolve,reject)=>{
+         console.log(data);
+      const resume={
+        name:data.name,
+        place:data.place,
+        phone:data.phone,
+        qualification:data.qualification,
+        skill:data.skill,
+        experience:data.experience
+      }
+
          const appliedJob=new apply({
             user_id:data.user_id,
             tasker_id:data.tasker_id,
             job_id:data.job_id,
-            resume:data.resume
-         
+            resume:resume
          })
          appliedJob.save().then((appliedJob)=>{
              resolve(appliedJob)

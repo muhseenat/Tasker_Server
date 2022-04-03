@@ -14,8 +14,7 @@ const createJobFunction=(req,res)=>{
 // JOB GETS CONTROLLER
  const getJobsFunction=(req,res)=>{
      getJobs().then((data)=>{
-         console.log('startinggggg');
-         console.log(data,'jobsssssssss');
+         
          res.send(data)
      }).catch(err=>{
          res.code(400).send({err})
