@@ -50,7 +50,7 @@ fastify.register(require("./src/routes/user"),{ prefix: '/api' });
 fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
 
 
-const { PORT=3000, LOCAL_ADDRESS='0.0.0.0' } = process.env
+const { PORT=5050, LOCAL_ADDRESS='0.0.0.0' } = process.env
  
 
    try {

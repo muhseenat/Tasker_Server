@@ -7,7 +7,7 @@
      properties:{
         _id:{type:'string'},
         name:{type:'string'},
-        url:{type:'string'}
+    
      }
      
  }
@@ -19,7 +19,7 @@
  const addCategoryOption={
     schema:{
         body:{
-            type:'string',
+            type:'object',
             required:["category"]
         }
 
