@@ -24,7 +24,9 @@ const appliedJobItem={
     properties:{
         user_id:{type:'string'},
         job_id:{type:'string'},
-        resume:{type:'object'},
+        name:{type:'string'},
+        email:{type:'string'},
+        qualification:{type:'string'}
      
         
     }

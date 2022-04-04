@@ -7,7 +7,7 @@ function userRoutes(fastify, opt, done) {
     fastify.post('/create/job',createJobOption);
     fastify.get('/get/jobs',getJobOptions);
     fastify.post('/apply/job',applyJobOptions);
-   fastify.get('/get/applied/jobs',appliedJobOption)
+    fastify.get('/get/applied/jobs',appliedJobOption)
 
   done();
 }
