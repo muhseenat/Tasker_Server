@@ -9,6 +9,9 @@ const appliedJobSchema=mongoose.Schema({
         type:'String',
         required:true,
     },
+    provider_id:{
+        type:'String'
+    },
     name:{
         type:'String',
         required:true,

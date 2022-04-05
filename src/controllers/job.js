@@ -23,6 +23,7 @@ const createJobFunction=(req,res)=>{
  
  //JOB APPLING CONTROLLER
  const applyJobFunction=(req,res)=>{
+     console.log(req.body);
      applyJob(req.body).then((data)=>{
          res.send(data);
      }).catch((err)=>{
