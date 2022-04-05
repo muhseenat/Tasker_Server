@@ -1,5 +1,5 @@
 
-const {createJobFunction,getJobsFunction,applyJobFunction,getAppliedJobFunction} = require('../controllers/job')
+const {createJobFunction,getJobsFunction,applyJobFunction,getAppliedJobFunction,SingleUserAppliedJobsFuntion} = require('../controllers/job')
 // JOB ITEM
 const jobItem = {
     type:'array',
@@ -84,4 +84,10 @@ const appliedJobOption={
 handler:getAppliedJobFunction
 }
 
-module.exports={createJobOption,getJobOptions,applyJobOptions,appliedJobOption}
+//GETTING APPLIED JOBS OF SPECIFIC USER
+ const singleUserAppliedJobOption={
+  
+     handler:SingleUserAppliedJobsFuntion
+ }
+
+module.exports={createJobOption,getJobOptions,applyJobOptions,appliedJobOption,singleUserAppliedJobOption}

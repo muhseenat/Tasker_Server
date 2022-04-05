@@ -69,6 +69,15 @@ module.exports = {
                 resolve(appliedJobs)
             }).catch(err=>reject(err))
         })
+    },
+
+
+    //GET SPECIFIC USER APPLED JOBS
+    getSingleUserAppliedjob:(id)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(id,'this id ihfhfjdfjksh')
+        })
+
     }
 
 }

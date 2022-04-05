@@ -32,7 +32,11 @@ const appliedJobSchema=mongoose.Schema({
     experience:{
         type:'String',
        
-    },           
+    }, 
+    status:{
+        type:'String',
+        default:'Pending'
+    }          
 },{timestamps:true})
 
 module.exports = mongoose.model('appliedjob',appliedJobSchema)
