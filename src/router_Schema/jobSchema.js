@@ -26,8 +26,10 @@ const appliedJobItem={
         job_id:{type:'string'},
         name:{type:'string'},
         email:{type:'string'},
-        qualification:{type:'string'}
-     
+        qualification:{type:'string'},
+        place: {type:'string'},
+        skill:{type:'string'},
+        experience: {type:'string'},
         
     }
 }

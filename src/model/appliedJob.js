@@ -9,10 +9,30 @@ const appliedJobSchema=mongoose.Schema({
         type:'String',
         required:true,
     },
-    resume:{
-        type:'Object'
-    }
-
+    name:{
+        type:'String',
+        required:true,
+    },
+    place:{
+        type:'String',
+        required:true,
+    },  
+    email:{
+        type:'String',
+        required:true,
+    },
+    qualification:{
+        type:'String',
+        
+    }, 
+     skill:{
+        type:'String',
+        
+    },          
+    experience:{
+        type:'String',
+       
+    },           
 },{timestamps:true})
 
 module.exports = mongoose.model('appliedjob',appliedJobSchema)
