@@ -1,5 +1,5 @@
- const {addCategoryFunction,getCategoryFunction} =require('../controllers/category');
- const upload = require('../config/multer');
+ const {addCategoryFunction,getCategoryFunction,
+    deleteCategoryFunction} =require('../controllers/category');
  
  //CATEGORY ITEM
  const categoryItem={
@@ -7,7 +7,7 @@
      properties:{
         _id:{type:'string'},
         name:{type:'string'},
-        url:{type:'string'}
+  
      }
      
  }
@@ -19,7 +19,7 @@
  const addCategoryOption={
     schema:{
         body:{
-            type:'object',
+            type:'string',
             required:["category"]
         }
 
@@ -38,5 +38,18 @@
      handler:getCategoryFunction
  }
 
+ //DELETE CATEGOTY OPTION SCHEMA
+ const deleteCategoryOption={
+     schema:{
+      
+         body:{
+            type:"string",
+             required:["id"]
+         }
+     },
+     handler:deleteCategoryFunction
+ }
 
- module.exports={addCategoryOption,getCategoryOption}
+ 
+
+ module.exports={addCategoryOption,getCategoryOption,deleteCategoryOption}
