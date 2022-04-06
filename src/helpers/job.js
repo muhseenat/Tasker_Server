@@ -117,5 +117,22 @@ module.exports = {
                 }).catch(err => reject(err))
         })
 
-    }
+    },
+  //CANCEL JOB HELPER
+   cancelJob:(id)=>{
+       console.log(id,'job id');
+       return new Promise((resolve,reject)=>{
+           User.updateOne(
+               {"applied_jobs.job_id":id},
+               {
+                   $set:{"applied_jobs.$.status":"Cancelled"}
+               }
+           ).then(()=>{
+               Job.deleteOne({_id:objectId(id)}).then((data)=>{
+                   resolve(data)
+               }).catch(err=>reject(err))
+           }).catch(err=>reject(err))
+       })
+   }
+
 }
