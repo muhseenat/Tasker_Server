@@ -1,6 +1,6 @@
 const {createMessage} = require('../helpers/messages')
 
-
+//CREATE MESSAGE CONTROLLER
 const messageFunction=(req,res)=>{
     createMessage(req.body).then((data)=>{
         res.send(data)
