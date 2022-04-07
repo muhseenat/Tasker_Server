@@ -1,10 +1,8 @@
 const db = require("./src/config/dbConnection")
 const environment= 'development'
-// const storage = require('./src/config/multer2')
-
-// const parser = multer({ storage });
-
 require('dotenv').config()
+
+
 const fastify = require("fastify")({
     logger: {
         prettyPrint:
@@ -40,14 +38,13 @@ fastify.use(require('cors')())
 //CONNECTION TO ATLAS
  db.dbConnect(process.env.MONGODB_URL)
 
-// // Rsegister plugins below:
 
-// //Decorate fastify with our parser
-// fastify.decorate('multer', { parser });
 
-//ADMIN AND USER ROUTES
+//ROUTES
 fastify.register(require("./src/routes/user"),{ prefix: '/api' });
-fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'})
+fastify.register(require('./src/routes/conversation'),{prefix:'/api/conversation'});
+fastify.register(require('./src/routes/messages'),{prefix:'/api/messages'});
+fastify.register(require('./src/routes/admin'),{prefix:'/api/admin'});
 
 
 const { PORT=5050, LOCAL_ADDRESS='0.0.0.0' } = process.env
