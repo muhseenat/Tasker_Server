@@ -46,9 +46,12 @@ const adminLoginFunction =(req,res)=>{
 
 //GET ALL USER CONTROLLER
 const getUsersFunction=(req,res)=>{
-    const userId=req.query.name;
-    getUsers(userId).then((data)=>[
+    const {userId}=req.query;
+    console.log(userId);
+    getUsers(userId).then((data)=>{
+        console.log(data,'this is dataa');
+        console.log(data,'this is dataa doccccc');
         res.send(data)
-    ]).catch(err=>res.code(400).send(err))
+    }).catch(err=>res.code(400).send(err))
 }
 module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction}

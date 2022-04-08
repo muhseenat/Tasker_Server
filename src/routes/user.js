@@ -7,7 +7,7 @@ const { createJobOption, getJobOptions, applyJobOptions, appliedJobOption,
 function userRoutes(fastify, opt, done) {
   fastify.post('/login', loginOption);
   fastify.post('/signup', signupOption);
-  fastify.get('users',getUsersOption)
+  fastify.get('/users',getUsersOption)
   fastify.post('/create/job', createJobOption);
   fastify.get('/get/jobs', getJobOptions);
   fastify.post('/apply/job', applyJobOptions);
