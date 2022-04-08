@@ -1,4 +1,4 @@
-const {userLoginFunction,userSignupFunction} = require('../controllers/auth')
+const {userLoginFunction,userSignupFunction,getUsersFunction} = require('../controllers/auth')
 //USER ITEM
 const userItem = {
     type:'object',
@@ -49,7 +49,16 @@ const signupOption ={
     },
     handler:userSignupFunction
 }
+//GET ALLL USERS OPTION SCHEMA
+const getUsersOption={
+    schema:{
+        response:{
+            200:userItem
+        }
+    },
+    handler:getUsersFunction
+}
 
 
 
-module.exports={loginOption,signupOption}
+module.exports={loginOption,signupOption,getUsersOption}

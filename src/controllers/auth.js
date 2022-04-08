@@ -1,4 +1,4 @@
-const {userLogin,userSignup} = require("../helpers/user")
+const {userLogin,userSignup,getUsers} = require("../helpers/user")
 const jwt = require('jsonwebtoken');
 
 
@@ -43,4 +43,12 @@ const adminLoginFunction =(req,res)=>{
     }
  
 }
-module.exports={userLoginFunction,userSignupFunction,adminLoginFunction}
+
+//GET ALL USER CONTROLLER
+const getUsersFunction=(req,res)=>{
+    const userId=req.query.name;
+    getUsers(userId).then((data)=>[
+        res.send(data)
+    ]).catch(err=>res.code(400).send(err))
+}
+module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction}

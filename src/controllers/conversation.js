@@ -9,6 +9,7 @@ const createConversationFunction=(req,res)=>{
 
 //GET CONVERSATION CONTROLLER
 const getConversationFunction=(req,res)=>{
+    console.log(req.params);
     const {id} = req.params
     getConversation(id).then((data)=>{
         res.send(data)

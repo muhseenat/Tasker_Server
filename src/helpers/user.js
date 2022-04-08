@@ -51,6 +51,15 @@ module.exports={
         })
 
 
-    }
+    },
 
+    getUser:(id)=>{
+        return new Promise((resolve,reject)=>{
+
+            User.findById(id).then((data)=>{
+                resolve(data._doc)
+            }).catch(err=>reject(err))
+        
+        })
+    }
 }
