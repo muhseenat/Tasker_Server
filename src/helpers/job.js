@@ -9,7 +9,6 @@ module.exports = {
     // JOB DETAILS TO DB HELPER 
     createJob: (data) => {
         return new Promise((resolve, reject) => {
-            console.log(data);
             const job = new Job({
                 user_id: data.user_id,
                 job_designation: data.job_designation,
@@ -23,8 +22,13 @@ module.exports = {
                 skills: data.skills
             })
             job.save().then((jobData) => {
-                resolve(jobData)
+                User.updateOne({_id:data.user_id},{$push:{posted_job:jobData._id}}).then((resp)=>{
+                    resolve(jobData)
+                }).catch((err)=>{
+                    reject(err)
+                })
             }).catch((err) => {
+
                 reject(err)
             })
         })
@@ -133,6 +137,30 @@ module.exports = {
                }).catch(err=>reject(err))
            }).catch(err=>reject(err))
        })
-   }
+   },
+   //GET JOB PROVIDERS DETAILS
+getProviders:()=>{
+    return new Promise((resolve,reject)=>{
+        Job.aggregate([
+            {
+                $group:{_id:null,count:{$sum:1}}
+            }
+        ])
+    })
+}
+// db.collection.aggregate( [
+//     { $group: { _id: null, myCount: { $sum: 1 } } },
+//     { $project: { _id: 0 } }
+//   ] )
 
+//   db.inventory.aggregate(
+//     [
+//        {
+//           $project: {
+//              item: 1,
+//              numberOfColors: { $size: "$colors" }
+//           }
+//        }
+//     ]
+//  )
 }

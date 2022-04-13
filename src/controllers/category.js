@@ -1,5 +1,5 @@
 
-const {getCategory,addCategory,  deleteCategory} = require('../helpers/category')
+const {getCategory,addCategory,  deleteCategory,} = require('../helpers/category')
 
 // CONTROLLER TO ADD CATEGORIES TO DB
 const addCategoryFunction= (req,res)=>{
@@ -29,6 +29,5 @@ const deleteCategoryFunction=(req,res)=>{
     res.send(data)
   }).catch(err=>res.code(400).send(err))
 }
-
 
 module.exports={addCategoryFunction,getCategoryFunction,deleteCategoryFunction}

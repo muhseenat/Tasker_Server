@@ -37,6 +37,7 @@ deleteCategory:(id)=>{
         }).catch(err=>reject(err))
 
     })
-}
+},
+
 
 }

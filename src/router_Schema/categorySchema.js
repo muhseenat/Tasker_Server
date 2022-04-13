@@ -1,5 +1,5 @@
  const {addCategoryFunction,getCategoryFunction,
-    deleteCategoryFunction} =require('../controllers/category');
+    deleteCategoryFunction,} =require('../controllers/category');
  
  //CATEGORY ITEM
  const categoryItem={
