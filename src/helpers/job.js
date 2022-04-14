@@ -160,20 +160,17 @@ module.exports = {
             }).catch(err => reject(err))
         })
     },
+    //GET TASKERS CONTROLLER
 
-  //CHANGE STS OF PROVIDERS
-  changeSts:(id)=>{
-      return new Promise(async(resolve,reject)=>{
-        let user = await User.findOne({ _id:id });
-
-        User.updateOne({_id:id},{$set:{status:!user.status}}).then(()=>{
+    getTaskers: () => {
+        return new Promise((resolve, reject) => {
             User.aggregate([
                 {
                     $project: {
                         name: 1,
                         email: 1,
                         status: 1,
-                        count: { $size: "$posted_job" }
+                        count: { $size: "$applied_jobs" },
                     }
                 },
                 {
@@ -183,10 +180,59 @@ module.exports = {
                 }
             ]).then((resp) => {
                 resolve(resp)
-            }).catch(err => reject(err)) 
-        }).catch(err=>reject(err))
+            }).catch(err => reject(err))
+        })
 
-      })
+    },
+    //CHANGE STS OF PROVIDERS
+    changeSts: (data) => {
+        console.log(data,'this us provider calll');
+        return new Promise(async (resolve, reject) => {
+            let user = await User.findOne({ _id: data.id });
 
-  }
+            User.updateOne({ _id: data.id}, { $set: { status: !user.status } }).then(() => {
+                if(data.provider){
+
+                    User.aggregate([
+                        {
+                            $project: {
+                                name: 1,
+                                email: 1,
+                                status: 1,
+                                count: { $size: "$posted_job" }
+                            }
+                        },
+                        {
+                            $match: {
+                                count: { $gte: 1 }
+                            }
+                        }
+                    ]).then((resp) => {
+                        resolve(resp)
+                    }).catch(err => reject(err))
+                }
+                else{
+                    User.aggregate([
+                        {
+                            $project: {
+                                name: 1,
+                                email: 1,
+                                status: 1,
+                                count: { $size: "$applied_jobs" },
+                            }
+                        },
+                        {
+                            $match: {
+                                count: { $gte: 1 }
+                            }
+                        }
+                    ]).then((resp) => {
+                        resolve(resp)
+                    }).catch(err => reject(err)) 
+                }
+            }).catch(err => reject(err))
+
+        })
+
+    }
 }

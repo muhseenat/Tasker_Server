@@ -1,8 +1,8 @@
 const { createJob, getJobs,
     applyJob, getAppliedJob,
     getSingleUserAppliedjob,
-    changeStatus ,cancelJob, getProviders,
-    changeSts
+    changeStatus, cancelJob, getProviders,
+    changeSts,getTaskers
 } = require("../helpers/job")
 
 // JOB CREATING CONTROLER
@@ -60,34 +60,41 @@ const changeStatusFunction = (req, res) => {
 }
 
 //CANCEL JOB CONTROLLER
-const cancelJobFunction=(req,res)=>{
-    const {id }= req.params;
-      cancelJob(id).then((data)=>{
-          res.send(data)
-      }).catch(err=>res.code(400).send(err))
+const cancelJobFunction = (req, res) => {
+    const { id } = req.params;
+    cancelJob(id).then((data) => {
+        res.send(data)
+    }).catch(err => res.code(400).send(err))
 }
 
 //GET PROVIDERS DETAILS 
-const getProviderFunction=(req,res)=>{
-    getProviders().then((data)=>{
-      res.send(data)
-    }).catch(err=>res.code(400).send(err))
-   }
-   
-//CHANGE STS OF PROVIDERS
-const changeStsFunction=(req,res)=>{
-    const {id} =req.params
-    changeSts(id).then((data)=>{
+const getProviderFunction = (req, res) => {
+    getProviders().then((data) => {
         res.send(data)
-    }).catch((err)=>{
+    }).catch(err => res.code(400).send(err))
+}
+
+//GET PROVIDERS DETAILS 
+const getTaskersFunction = (req, res) => {
+    getTaskers().then((data) => {
+        res.send(data)
+    }).catch(err => res.code(400).send(err))
+}
+
+//CHANGE STS OF PROVIDERS
+const changeStsFunction = (req, res) => {
+    // const { id } = req.params
+    changeSts(req.body).then((data) => {
+        res.send(data)
+    }).catch((err) => {
         res.code(400).send(err)
     })
-}   
-  
+}
+
 
 module.exports = {
     createJobFunction, getJobsFunction,
     applyJobFunction, getAppliedJobFunction, changeStatusFunction,
-    SingleUserAppliedJobsFuntion,cancelJobFunction,getProviderFunction,
-    changeStsFunction
+    SingleUserAppliedJobsFuntion, cancelJobFunction, getProviderFunction,
+    changeStsFunction, getTaskersFunction
 }
