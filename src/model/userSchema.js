@@ -28,9 +28,9 @@ const UserSchema = mongoose.Schema({
     applied_jobs:{
         type:Array
     },
-    // posted_job:{
-    //     type:Array
-    // }
+    posted_job:{
+        type:Array
+    }
 },{timestamps:true});
 
     

@@ -1,7 +1,8 @@
 const { createJob, getJobs,
     applyJob, getAppliedJob,
     getSingleUserAppliedjob,
-    changeStatus ,cancelJob, getProviders
+    changeStatus ,cancelJob, getProviders,
+    changeSts
 } = require("../helpers/job")
 
 // JOB CREATING CONTROLER
@@ -73,10 +74,20 @@ const getProviderFunction=(req,res)=>{
     }).catch(err=>res.code(400).send(err))
    }
    
+//CHANGE STS OF PROVIDERS
+const changeStsFunction=(req,res)=>{
+    const {id} =req.params
+    changeSts(id).then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.code(400).send(err)
+    })
+}   
   
 
 module.exports = {
     createJobFunction, getJobsFunction,
     applyJobFunction, getAppliedJobFunction, changeStatusFunction,
-    SingleUserAppliedJobsFuntion,cancelJobFunction,getProviderFunction
+    SingleUserAppliedJobsFuntion,cancelJobFunction,getProviderFunction,
+    changeStsFunction
 }

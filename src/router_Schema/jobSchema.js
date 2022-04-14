@@ -3,7 +3,8 @@ const { createJobFunction, getJobsFunction,
     applyJobFunction, getAppliedJobFunction,
     SingleUserAppliedJobsFuntion,
     changeStatusFunction,
-    cancelJobFunction,getProviderFunction
+    cancelJobFunction,getProviderFunction,
+    changeStsFunction
 } = require('../controllers/job')
 // JOB ITEM
 const jobItem = {
@@ -114,9 +115,13 @@ const cancelJobOption = {
 const getProviderOption={
     handler:getProviderFunction
  }
+ //CHANGE STS OF JOB PROVIDER
+ const changeStsOption={
+     handler:changeStsFunction
+ }
 
 module.exports = {
     createJobOption, getJobOptions, applyJobOptions,
     appliedJobOption, singleUserAppliedJobOption,
-    changeStatusOption, cancelJobOption,getProviderOption
+    changeStatusOption, cancelJobOption,getProviderOption,changeStsOption
 }

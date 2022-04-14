@@ -22,9 +22,9 @@ module.exports = {
                 skills: data.skills
             })
             job.save().then((jobData) => {
-                User.updateOne({_id:data.user_id},{$push:{posted_job:jobData._id}}).then((resp)=>{
+                User.updateOne({ _id: data.user_id }, { $push: { posted_job: jobData._id } }).then((resp) => {
                     resolve(jobData)
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err)
                 })
             }).catch((err) => {
@@ -113,54 +113,80 @@ module.exports = {
                 {
                     $set: { "applied_jobs.$.status": sts },
                 })
-                .then(()=>{
+                .then(() => {
                     apply.updateOne({ _id: objectId(id) }, { $set: { status: sts } })
-                    .then((data) => {
-                        resolve(data)
-                    }).catch(err => reject(err))
+                        .then((data) => {
+                            resolve(data)
+                        }).catch(err => reject(err))
                 }).catch(err => reject(err))
         })
 
     },
-  //CANCEL JOB HELPER
-   cancelJob:(id)=>{
-       console.log(id,'job id');
-       return new Promise((resolve,reject)=>{
-           User.updateOne(
-               {"applied_jobs.job_id":id},
-               {
-                   $set:{"applied_jobs.$.status":"Cancelled"}
-               }
-           ).then(()=>{
-               Job.deleteOne({_id:objectId(id)}).then((data)=>{
-                   resolve(data)
-               }).catch(err=>reject(err))
-           }).catch(err=>reject(err))
-       })
-   },
-   //GET JOB PROVIDERS DETAILS
-getProviders:()=>{
-    return new Promise((resolve,reject)=>{
-        Job.aggregate([
-            {
-                $group:{_id:null,count:{$sum:1}}
-            }
-        ])
-    })
-}
-// db.collection.aggregate( [
-//     { $group: { _id: null, myCount: { $sum: 1 } } },
-//     { $project: { _id: 0 } }
-//   ] )
+    //CANCEL JOB HELPER
+    cancelJob: (id) => {
+        console.log(id, 'job id');
+        return new Promise((resolve, reject) => {
+            User.updateOne(
+                { "applied_jobs.job_id": id },
+                {
+                    $set: { "applied_jobs.$.status": "Cancelled" }
+                }
+            ).then(() => {
+                Job.deleteOne({ _id: objectId(id) }).then((data) => {
+                    resolve(data)
+                }).catch(err => reject(err))
+            }).catch(err => reject(err))
+        })
+    },
+    //GET JOB PROVIDERS DETAILS
+    getProviders: () => {
+        return new Promise((resolve, reject) => {
+            User.aggregate([
+                {
+                    $project: {
+                        name: 1,
+                        email: 1,
+                        status: 1,
+                        count: { $size: "$posted_job" }
+                    }
+                },
+                {
+                    $match: {
+                        count: { $gte: 1 }
+                    }
+                }
+            ]).then((resp) => {
+                resolve(resp)
+            }).catch(err => reject(err))
+        })
+    },
 
-//   db.inventory.aggregate(
-//     [
-//        {
-//           $project: {
-//              item: 1,
-//              numberOfColors: { $size: "$colors" }
-//           }
-//        }
-//     ]
-//  )
+  //CHANGE STS OF PROVIDERS
+  changeSts:(id)=>{
+      return new Promise(async(resolve,reject)=>{
+        let user = await User.findOne({ _id:id });
+
+        User.updateOne({_id:id},{$set:{status:!user.status}}).then(()=>{
+            User.aggregate([
+                {
+                    $project: {
+                        name: 1,
+                        email: 1,
+                        status: 1,
+                        count: { $size: "$posted_job" }
+                    }
+                },
+                {
+                    $match: {
+                        count: { $gte: 1 }
+                    }
+                }
+            ]).then((resp) => {
+                resolve(resp)
+            }).catch(err => reject(err)) 
+        }).catch(err=>reject(err))
+
+      })
+
+  }
 }
