@@ -1,5 +1,5 @@
 const Job = require('../model/jobSchema');
-const apply = require('../model/appliedJob');
+const Apply = require('../model/appliedJob');
 const User = require('../model/userSchema')
 const mongoose = require('mongoose')
 const objectId = mongoose.Types.ObjectId;
@@ -61,7 +61,7 @@ module.exports = {
 
             User.updateOne({ _id: data.user_id }, { $push: { applied_jobs: applied_job } }).then(() => {
                 //CREATE A DOCUMENT IN APPLIED JOB COLLECTION
-                const appliedJob = new apply({
+                const appliedJob = new Apply({
                     user_id: data.user_id,
                     job_id: data.job_id,
                     provider_id: data.provider_id,
@@ -87,7 +87,7 @@ module.exports = {
     //GET APPLIED JOBS HELPER
     getAppliedJob: (id) => {
         return new Promise((resolve, reject) => {
-            apply.find({ job_id: objectId(id) }).then((appliedJobs) => {
+            Apply.find({ job_id: objectId(id) }).then((appliedJobs) => {
                 resolve(appliedJobs)
             }).catch(err => reject(err))
         })
@@ -114,7 +114,7 @@ module.exports = {
                     $set: { "applied_jobs.$.status": sts },
                 })
                 .then(() => {
-                    apply.updateOne({ _id: objectId(id) }, { $set: { status: sts } })
+                    Apply.updateOne({ _id: objectId(id) }, { $set: { status: sts } })
                         .then((data) => {
                             resolve(data)
                         }).catch(err => reject(err))
@@ -186,12 +186,12 @@ module.exports = {
     },
     //CHANGE STS OF PROVIDERS
     changeSts: (data) => {
-        console.log(data,'this us provider calll');
+        console.log(data, 'this us provider calll');
         return new Promise(async (resolve, reject) => {
             let user = await User.findOne({ _id: data.id });
 
-            User.updateOne({ _id: data.id}, { $set: { status: !user.status } }).then(() => {
-                if(data.provider){
+            User.updateOne({ _id: data.id }, { $set: { status: !user.status } }).then(() => {
+                if (data.provider) {
 
                     User.aggregate([
                         {
@@ -211,7 +211,7 @@ module.exports = {
                         resolve(resp)
                     }).catch(err => reject(err))
                 }
-                else{
+                else {
                     User.aggregate([
                         {
                             $project: {
@@ -228,11 +228,43 @@ module.exports = {
                         }
                     ]).then((resp) => {
                         resolve(resp)
-                    }).catch(err => reject(err)) 
+                    }).catch(err => reject(err))
                 }
             }).catch(err => reject(err))
 
         })
 
+    },
+    // GET ALL JOB COUNT
+    getCount: () => {
+        return new Promise((resolve, reject) => {
+
+            Job.count().then((resp) => {
+                resolve(resp)
+            }).catch(err => reject(err))
+        })
+    },
+    //GET ALL APPLIED JOB COUNT
+    getAppliedCount: () => {
+        return new Promise((resolve, reject) => {
+            Apply.count().then((resp) => {
+                resolve(resp)
+            }).catch(err => reject(err))
+        })
+    },
+    //GET ALL  JOB DONE COUNT
+    getJobsStsCount: () => {
+        return new Promise((resolve, reject) => {
+            Apply.aggregate([
+                {
+                    $group: {
+                        _id: "$status",
+                        count: { $sum: 1 }
+                    }
+                }
+            ]).then((resp)=>{
+                resolve(resp)
+            }).catch(err=>reject(err))
+        })
     }
 }

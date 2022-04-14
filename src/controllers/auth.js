@@ -1,4 +1,4 @@
-const {userLogin,userSignup,getUsers} = require("../helpers/user")
+const {userLogin,userSignup,getUsers,getCount} = require("../helpers/user")
 const jwt = require('jsonwebtoken');
 
 
@@ -54,4 +54,11 @@ const getUsersFunction=(req,res)=>{
         res.send(data)
     }).catch(err=>res.code(400).send(err))
 }
-module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction}
+
+//GET USERS COUNT CONTROLLER
+const getUsersCountFunction=(req,res)=>{
+    getCount().then((data)=>{
+        res.send(data)
+    }).catch(err=>res.code(400).send(err))
+}
+module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction,getUsersCountFunction}

@@ -61,5 +61,15 @@ module.exports={
             }).catch(err=>reject(err))
         
         })
+    },
+
+    //GET USERS COUNT
+    getCount:()=>{
+    return new Promise((resolve,reject)=>{
+        User.count().then((resp)=>{
+            console.log(resp);
+            resolve(resp)
+        }).catch(err=>reject(err))
+    })
     }
 }
