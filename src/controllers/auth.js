@@ -1,5 +1,5 @@
 const {userLogin,userSignup,getUsers,
-    getStatics,getCount} = require("../helpers/user")
+    getStatics,getCount, getTopTaskers} = require("../helpers/user")
 const jwt = require('jsonwebtoken');
 
 
@@ -71,4 +71,11 @@ const getUserStaticsFunction=(req,res)=>{
         res.send(data)
     }).catch(err=>res.code(400).send(err))
 }
-module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction,getUserStaticsFunction,getUsersCountFunction}
+
+//GET TOP TASKERS CONTROLLER
+const getTopTaskersFunction=(req,res)=>{
+    getTopTaskers().then((data)=>{
+        res.send(data)
+    }).catch(err=>res.code(400).send(err))
+}
+module.exports={userLoginFunction,userSignupFunction,adminLoginFunction,getUsersFunction,getTopTaskersFunction,getUserStaticsFunction,getUsersCountFunction}

@@ -1,5 +1,5 @@
 const {userLoginFunction,userSignupFunction,getUsersFunction,
-    getUsersCountFunction,getUserStaticsFunction} = require('../controllers/auth')
+    getUsersCountFunction,getUserStaticsFunction,getTopTaskersFunction} = require('../controllers/auth')
 //USER ITEM
 const userItem = {
     type:'object',
@@ -69,5 +69,9 @@ const getUsersCountOption={
 const getStaticsOption={
     handler:getUserStaticsFunction
 }
+//GET TOP TASKERS OPTION
+const taskersOption={
+    handler:getTopTaskersFunction
+}
 
-module.exports={loginOption,signupOption,getUsersOption,getUsersCountOption,getStaticsOption}
+module.exports={loginOption,signupOption,taskersOption,getUsersOption,getUsersCountOption,getStaticsOption}
