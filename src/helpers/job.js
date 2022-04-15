@@ -35,11 +35,25 @@ module.exports = {
     },
 
     // GET JOBS FROM DB
-    getJobs: () => {
+    getJobs: (search) => {
         return new Promise((resolve, reject) => {
-            Job.find({}).then((data) => {
-                resolve(data)
-            }).catch(err => reject(err))
+            if(search!="undefined"){
+                Job.find({
+                    $or:[
+                        {job_designation:{ $regex:search, $options: 'i'}},
+                        {category:{ $regex:search, $options: 'i'}},
+                        {province:{ $regex:search, $options: 'i'}},
+                    ]
+                }).then((data) => {
+                    resolve(data)
+                }).catch(err => reject(err)) 
+            }
+            else{
+                Job.find({}).then((data) => {
+                    resolve(data)
+                }).catch(err => reject(err))
+            }
+           
         })
     },
 

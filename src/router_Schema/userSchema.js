@@ -1,4 +1,5 @@
-const {userLoginFunction,userSignupFunction,getUsersFunction,getUsersCountFunction} = require('../controllers/auth')
+const {userLoginFunction,userSignupFunction,getUsersFunction,
+    getUsersCountFunction,getUserStaticsFunction} = require('../controllers/auth')
 //USER ITEM
 const userItem = {
     type:'object',
@@ -64,4 +65,9 @@ const getUsersCountOption={
    handler:getUsersCountFunction
 }
 
-module.exports={loginOption,signupOption,getUsersOption,getUsersCountOption}
+//GET USER STATICS
+const getStaticsOption={
+    handler:getUserStaticsFunction
+}
+
+module.exports={loginOption,signupOption,getUsersOption,getUsersCountOption,getStaticsOption}

@@ -20,7 +20,8 @@ const createJobFunction = (req, res) => {
 
 // JOB GETS CONTROLLER
 const getJobsFunction = (req, res) => {
-    getJobs().then((data) => {
+ const {search}=req.query
+    getJobs(search).then((data) => {
 
         res.send(data)
     }).catch(err => {

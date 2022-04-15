@@ -71,5 +71,75 @@ module.exports={
             resolve(resp)
         }).catch(err=>reject(err))
     })
+    },
+
+
+
+    //GET USER STATICS BY MONTH
+    getStatics:()=>{
+        return new Promise((resolve,reject)=>{
+            const date = new Date();
+            const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+            console.log(date,'dataaa');
+            console.log(lastYear,'last yeahgfdsf');
+            User.aggregate([
+                {
+                  $match: {
+                    createdAt: {
+                      $gte: lastYear,
+                    },
+                  },
+                },
+                {
+                  $project: {
+                    month: {
+                      $month: "$createdAt",
+                    },
+                  },
+                },
+                {
+                  $group: {
+                    _id: "$month",
+                    total: { $sum: 1 },
+                  },
+                },
+              ]).then((resp)=>{
+                  console.log(resp);
+                  resolve(resp)
+              }).catch(err=>reject(err))
+        })
     }
 }
+
+const userStatics = (req, res) => {
+    const date = new Date();
+    const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+    User.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: lastYear,
+          },
+        },
+      },
+      {
+        $project: {
+          month: {
+            $month: "$createdAt",
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ])
+      .then((details) => {
+        res.status(200).json({ details });
+      })
+      .catch((err) => {
+        res.status(400).json({ err });
+      });
+  };
