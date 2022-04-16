@@ -37,7 +37,8 @@ await fastify.register(require('fastify-express'))
 fastify.register(require('fastify-multipart'))
 fastify.register(fastifyIO,{
     cors:{
-        origin:['*','https://tasker-gold.vercel.app/','http://localhost:3000']
+        origin:['*','https://tasker-gold.vercel.app/','http://localhost:3000'],
+        credentials:true
     }
 });
 fastify.use(require('cors')())
