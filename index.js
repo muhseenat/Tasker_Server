@@ -35,7 +35,11 @@ const start = async()=>{
 
 await fastify.register(require('fastify-express'))
 fastify.register(require('fastify-multipart'))
-fastify.register(fastifyIO);
+fastify.register(fastifyIO,{
+    cors:{
+        origin:'*'
+    }
+});
 fastify.use(require('cors')())
 
 //CONNECTION TO ATLAS
@@ -76,13 +80,13 @@ fastify.ready().then(() => {
         //TAKE USERID AND SOCKETID FROM USER
         socket.on('addUser', (userId) => {
             addUser(userId, socket.id);
-            io.emit('getUsers', users);
+            fastify.io.emit('getUsers', users);
         });
     
         //Send and get messages
         socket.on('sendMessage',({senderId,receiverId,text})=>{
             const user=getUser(receiverId);
-            io.to(user?.socketId).emit('getMessage',{
+            fastify.io.to(user?.socketId).emit('getMessage',{
                 senderId,
                 text,
             });
@@ -91,7 +95,7 @@ fastify.ready().then(() => {
     
         //When disconnect user
         socket.on("disconnect", () => {
-            io.emit('getUsers', users)
+           fastify.io.emit('getUsers', users)
             removeUser(socket.id);
         })
     })

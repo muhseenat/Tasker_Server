@@ -38,6 +38,7 @@ module.exports = {
     getJobs: (search) => {
         return new Promise((resolve, reject) => {
             if(search){
+                console.log(search);
                 Job.find({
                     $or:[
                         {job_designation:{ $regex:search, $options: 'i'}},
