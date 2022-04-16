@@ -7,10 +7,10 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const { email, password } = data
       User.findOne({ email }).then((data) => {
-        
+        console.log(data,'this is data');
         if (!data) {
           reject('User not found')
-        } else if(data.status=="Active"){
+        } else if(data.status){
           data.comparePassword(password, (err, success) => {
             if (success) {
               resolve(data)
