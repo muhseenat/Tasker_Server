@@ -4,7 +4,7 @@ const { createJob, getJobs,
     changeStatus, cancelJob, getProviders,
     changeSts,getTaskers, getCount,
     getJobsStsCount,
-    getAppliedCount
+    getAppliedCount, getJobsById
 } = require("../helpers/job")
 
 // JOB CREATING CONTROLER
@@ -20,13 +20,22 @@ const createJobFunction = (req, res) => {
 
 // JOB GETS CONTROLLER
 const getJobsFunction = (req, res) => {
- const {search}=req.query
-    getJobs(search).then((data) => {
-        res.send(data)
-    }).catch(err => {
-        res.code(400).send({ err })
-    })
-}
+    const {search}=req.query
+       getJobs(search).then((data) => {
+           res.send(data)
+       }).catch(err => {
+           res.code(400).send({ err })
+       })
+   }
+   // JOB GETS  BY ID CONTROLLER
+const getJobsByIdFunction = (req, res) => {
+    const {id}=req.params
+       getJobsById(id).then((data) => {
+           res.send(data)
+       }).catch(err => {
+           res.code(400).send({ err })
+       })
+   }
 
 //JOB APPLING CONTROLLER
 const applyJobFunction = (req, res) => {
@@ -112,7 +121,7 @@ const getJobStsFunction=(req,res)=>{
 }
 
 module.exports = {
-    createJobFunction, getJobsFunction,
+    createJobFunction, getJobsFunction,getJobsByIdFunction,
     applyJobFunction, getAppliedJobFunction, changeStatusFunction,
     SingleUserAppliedJobsFuntion, cancelJobFunction, getProviderFunction,getJobStsFunction,
     changeStsFunction, getTaskersFunction,getJobCountFunction,getAppliedJobCountFunction

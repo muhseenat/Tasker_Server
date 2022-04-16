@@ -7,9 +7,10 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const { email, password } = data
       User.findOne({ email }).then((data) => {
+        
         if (!data) {
           reject('User not found')
-        } else {
+        } else if(data.status=="Active"){
           data.comparePassword(password, (err, success) => {
             if (success) {
               resolve(data)
@@ -19,6 +20,9 @@ module.exports = {
             }
           })
 
+        }
+        else{
+          reject('You are Blocked by Admin')
         }
 
       })

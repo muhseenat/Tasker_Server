@@ -39,6 +39,10 @@ const JobSchema = mongoose.Schema({
     skills:{
         type:String,
         required:true
+    },
+    status:{
+        type:String,
+        default:"Pending"
     }
 },{timestamps:true})
 

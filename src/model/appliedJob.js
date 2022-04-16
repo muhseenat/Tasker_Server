@@ -2,42 +2,42 @@ const mongoose= require ('mongoose')
 
 const appliedJobSchema=mongoose.Schema({
     user_id:{
-        type:'String',
+        type:String,
         required:true,
     },
     job_id:{
-        type:'String',
+        type:String,
         required:true,
     },
     provider_id:{
-        type:'String'
+        type:String
     },
     name:{
-        type:'String',
+        type:String,
         required:true,
     },
     place:{
-        type:'String',
+        type:String,
         required:true,
     },  
     email:{
-        type:'String',
+        type:String,
         required:true,
     },
     qualification:{
-        type:'String',
+        type:String,
         
     }, 
      skill:{
-        type:'String',
+        type:String,
         
     },          
     experience:{
-        type:'String',
+        type:String,
        
     }, 
     status:{
-        type:'String',
+        type:String,
         default:'Pending'
     }          
 },{timestamps:true})

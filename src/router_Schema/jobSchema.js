@@ -6,7 +6,7 @@ const { createJobFunction, getJobsFunction,
     cancelJobFunction,getProviderFunction,
     getTaskersFunction,getJobStsFunction,
     changeStsFunction,getJobCountFunction,
-    getAppliedJobCountFunction
+    getAppliedJobCountFunction,getJobsByIdFunction
 } = require('../controllers/job')
 // JOB ITEM
 const jobItem = {
@@ -22,7 +22,8 @@ const jobItem = {
         minimum_pay: { type: 'string' },
         from: { type: 'string' },
         to: { type: 'string' },
-        skills: { type: 'string' }
+        skills: { type: 'string' },
+        status: { type: 'string' },
     }
 }
 
@@ -67,6 +68,10 @@ const getJobOptions = {
         }
     },
     handler: getJobsFunction
+}//GET JOB  BY ID OPTION SCHEMA
+const getJobByIdOptions = {
+  
+    handler: getJobsByIdFunction
 }
 
 //APPLY JOB OPTION SCHEMA
@@ -140,7 +145,7 @@ const getTaskersOption={
 }
 
 module.exports = {
-    createJobOption, getJobOptions, applyJobOptions,
+    createJobOption, getJobOptions,getJobByIdOptions, applyJobOptions,
     appliedJobOption, singleUserAppliedJobOption,
     changeStatusOption, cancelJobOption,getProviderOption,changeStsOption,
     getTaskersOption,getJobCountOption,getAppliedJobCountOption,getJobStsOption

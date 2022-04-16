@@ -1,5 +1,5 @@
 const { loginOption, signupOption,getUsersOption,taskersOption } = require('../router_Schema/userSchema')
-const { createJobOption, getJobOptions, applyJobOptions, appliedJobOption,
+const { createJobOption, getJobOptions,getJobByIdOptions, applyJobOptions, appliedJobOption,
   singleUserAppliedJobOption,
   changeStatusOption,
   cancelJobOption } = require('../router_Schema/jobSchema');
@@ -10,6 +10,7 @@ function userRoutes(fastify, opt, done) {
   fastify.get('/users',getUsersOption)
   fastify.post('/create/job', createJobOption);
   fastify.get('/get/jobs', getJobOptions);
+  fastify.get('/get/jobs/:id', getJobByIdOptions);
   fastify.post('/apply/job', applyJobOptions);
   fastify.get('/job/applied/user/:id', appliedJobOption)
   fastify.get('/top/taskers', taskersOption)

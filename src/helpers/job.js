@@ -37,26 +37,34 @@ module.exports = {
     // GET JOBS FROM DB
     getJobs: (search) => {
         return new Promise((resolve, reject) => {
-            if(search){
+            if (search) {
                 console.log(search);
                 Job.find({
-                    $or:[
-                        {job_designation:{ $regex:search, $options: 'i'}},
-                        {category:{ $regex:search, $options: 'i'}},
-                        {province:{ $regex:search, $options: 'i'}},
+                    $or: [
+                        { job_designation: { $regex: search, $options: 'i' } },
+                        { category: { $regex: search, $options: 'i' } },
+                        { province: { $regex: search, $options: 'i' } },
                     ]
                 }).then((data) => {
                     console.log('this is not found')
                     resolve(data)
-                }).catch(err => reject(err)) 
+                }).catch(err => reject(err))
             }
-            else{
+            else {
                 Job.find({}).then((data) => {
                     resolve(data)
                 }).catch(err => reject(err))
             }
-           
+
         })
+    },
+    //GET JOBS BY ID
+    getJobsById: (id) => {
+        return new Promise((resolve, reject) => {
+            Job.find({ user_id: id }).then(resp => resolve(resp))
+                .catch(err => reject(err))
+        })
+
     },
 
     //APPLIED JOB DETAILS TO DB HELPER
@@ -130,13 +138,14 @@ module.exports = {
                     $set: { "applied_jobs.$.status": sts },
                 })
                 .then(() => {
-                    Apply.updateOne({ _id: objectId(id) }, { $set: { status: sts } })
-                        .then((data) => {
-                            resolve(data)
-                        }).catch(err => reject(err))
+                    Apply.updateOne({ _id: objectId(id) }, { $set: { status: sts } }).then(() => {
+                        Job.updateOne({ _id: objectId(jobId) }, { $set: { status: sts } })
+                            .then((data) => {
+                                resolve(data)
+                            }).catch(err => reject(err))
+                    }).catch(err => reject(err))
                 }).catch(err => reject(err))
         })
-
     },
     //CANCEL JOB HELPER
     cancelJob: (id) => {
@@ -278,9 +287,9 @@ module.exports = {
                         count: { $sum: 1 }
                     }
                 }
-            ]).then((resp)=>{
+            ]).then((resp) => {
                 resolve(resp)
-            }).catch(err=>reject(err))
+            }).catch(err => reject(err))
         })
     }
 }
