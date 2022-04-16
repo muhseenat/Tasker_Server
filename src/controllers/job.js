@@ -22,7 +22,6 @@ const createJobFunction = (req, res) => {
 const getJobsFunction = (req, res) => {
  const {search}=req.query
     getJobs(search).then((data) => {
-
         res.send(data)
     }).catch(err => {
         res.code(400).send({ err })

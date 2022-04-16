@@ -37,7 +37,7 @@ module.exports = {
     // GET JOBS FROM DB
     getJobs: (search) => {
         return new Promise((resolve, reject) => {
-            if(search!="undefined"){
+            if(search){
                 Job.find({
                     $or:[
                         {job_designation:{ $regex:search, $options: 'i'}},
@@ -45,6 +45,7 @@ module.exports = {
                         {province:{ $regex:search, $options: 'i'}},
                     ]
                 }).then((data) => {
+                    console.log('this is not found')
                     resolve(data)
                 }).catch(err => reject(err)) 
             }
