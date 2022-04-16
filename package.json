@@ -20,6 +20,7 @@
     "fastify-express": "^0.3.3",
     "fastify-multer": "^2.0.2",
     "fastify-multipart": "^5.3.1",
+    "fastify-socket.io": "^3.0.0",
     "fastify-swagger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.8",
