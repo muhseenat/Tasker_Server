@@ -59,6 +59,8 @@ const getAppliedJobFunction = (req, res) => {
 const SingleUserAppliedJobsFuntion = (req, res) => {
     const { id } = req.params
     getSingleUserAppliedjob(id).then((data) => {
+
+        
         res.send(data)
 
     }).catch(err => res.code(400).send(err))

@@ -83,7 +83,7 @@ module.exports = {
                 status: "Pending"
             }
 
-            User.updateOne({ _id: data.user_id }, { $push: { applied_jobs: applied_job } }).then(() => {
+           
                 //CREATE A DOCUMENT IN APPLIED JOB COLLECTION
                 const appliedJob = new Apply({
                     user_id: data.user_id,
@@ -96,15 +96,22 @@ module.exports = {
                     skill: data.skill,
                     experience: data.experience
                 })
-                appliedJob.save().then((appliedJob) => {
-                    resolve(appliedJob)
+                console.log(data.job_id,'job idddddddd');
+                appliedJob.save().then(() => {
+                    const item={
+                        job_id:objectId(data.job_id),
+                        status:"Pending",
+                    }
+                    User.updateOne({ _id: data.user_id }, { $push: { applied_jobs:item} }).then((resp)=>{
+                        resolve(resp)
+
+                    }).catch(err=>reject(err))
                 }).catch((err) => {
                     reject(err)
                 })
-            })
+        })
 
 
-        }).catch(err => reject(err))
 
     },
 
@@ -121,11 +128,47 @@ module.exports = {
     //GET SPECIFIC USER APPLED JOBS
     getSingleUserAppliedjob: (id) => {
         return new Promise((resolve, reject) => {
-            User.find({ _id: objectId(id) }, { applied_jobs: 1, _id: 0 }).then((data) => {
-                resolve(data);
-            }).catch(err => reject(err))
+            // User.find({ _id: objectId(id) }, { applied_jobs: 1, _id: 0 }).then((data) => {
+            //     resolve(data);
+            // }).catch(err => reject(err))
+            User.aggregate([
+                {
+                    $match:{
+                        _id:objectId(id)
+                    }
+                },
+                {
+                    $unwind:"$applied_jobs"
+                },
+                {
+                    $project:{
+                        id:"$applied_jobs.job_id",
+                        status:"$applied_jobs.status"
+    
+                    }
+                },
+                {
+                    $lookup:{
+                        from:'jobs',
+                        localField:'id',
+                        foreignField:'_id',
+                        as:'job'
+                    }
+                },
+                // {
+                //     $project:{
+                //         _id:1,
+                //         pay:1,
+                //         city:1,
+                //         job_designation:1,
+                
+                //     }
+                // }
+            ]).then((resp)=>{
+                resolve(resp)
+            }).catch(err=>reject(err))
         })
-
+       
     },
     // CHANGE STATUS OF JOB
     changeStatus: (data) => {
