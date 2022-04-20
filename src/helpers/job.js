@@ -128,9 +128,7 @@ module.exports = {
     //GET SPECIFIC USER APPLED JOBS
     getSingleUserAppliedjob: (id) => {
         return new Promise((resolve, reject) => {
-            // User.find({ _id: objectId(id) }, { applied_jobs: 1, _id: 0 }).then((data) => {
-            //     resolve(data);
-            // }).catch(err => reject(err))
+            
             User.aggregate([
                 {
                     $match:{
@@ -173,7 +171,6 @@ module.exports = {
     // CHANGE STATUS OF JOB
     changeStatus: (data) => {
         return new Promise((resolve, reject) => {
-            console.log(data);
             const { sts, id, userId, jobId } = data;
             User.updateOne(
                 { _id: objectId(userId), "applied_jobs.job_id": jobId },
@@ -192,7 +189,6 @@ module.exports = {
     },
     //CANCEL JOB HELPER
     cancelJob: (id) => {
-        console.log(id, 'job id');
         return new Promise((resolve, reject) => {
             User.updateOne(
                 { "applied_jobs.job_id": id },
@@ -254,7 +250,6 @@ module.exports = {
     },
     //CHANGE STS OF PROVIDERS
     changeSts: (data) => {
-        console.log(data, 'this us provider calll');
         return new Promise(async (resolve, reject) => {
             let user = await User.findOne({ _id: data.id });
 
