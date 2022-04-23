@@ -41,7 +41,9 @@ fastify.register(fastifyIO,{
         credentials:true
     }
 });
-fastify.use(require('cors')())
+fastify.use(require('cors')({
+    origin:['*','https://tasker-gold.vercel.app/','http://localhost:3000'],
+}))
 
 //CONNECTION TO ATLAS
  db.dbConnect(process.env.MONGODB_URL)
